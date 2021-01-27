@@ -1,39 +1,51 @@
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-  <title>Empresas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-	<style type="text/css">
-	</style>
-</head>
-<body>
-
-<div class="container">
-  <h1>Empresas</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($empresas as $empresa): ?>
-        <tr>
-          <td>
-            <a class="btn btn-secondary" href="<?php echo site_url('empresas/profile/' . $empresa->id);?>">
-              <?php echo $empresa->id;?>
-            </a>  
-          </td>
-          <td><?php echo $empresa->nome;?></td>
-        </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
+<div class="container container-fluid">
+	<div class="card">
+		<div class="card-header">
+			<div class="row m-2">
+				<div class="col-6 align-self-start">
+					<h1>Empresas</h1>
+				</div>
+				<div class="col-6 d-flex flex-row-reverse bd-highlight text-center">
+					<a href="<?php echo site_url('empresas/add/'); ?>" class="btn btn-info text-white"><i class="ft-plus"></i> Cadastrar Novo</a>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="row m-2">
+				<div class="col-12">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($empresas as $empresa) : ?>
+								<tr>
+									<td><?php echo $empresa['id']; ?></td>
+									<td><?php echo $empresa['nome']; ?></td>
+									<td>
+										<div class="row">
+											<div class="col-md-6 col-sm-12">
+												<a class="btn btn-primary" href="<?php echo site_url('empresas/profile/' . $empresa['id']); ?>">
+													Alterar
+												</a>
+											</div>
+											<div class="col-md-6 col-sm-12">
+												<a class="btn btn-danger" data-id="<?php echo $empresa['id']; ?>">
+													Deletar
+												</a>
+											</div>
+										</div>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-</body>
-</html>

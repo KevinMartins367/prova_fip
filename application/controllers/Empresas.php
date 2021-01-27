@@ -18,7 +18,7 @@ class Empresas extends CI_Controller {
 
 
 
-		$data['users'] = $this->model_empresas->get_all();
+		$data['empresas'] = $this->model_empresas->get_all();
 		// VIEWS
 		$this->load->view('header', $data);
 		$this->load->view('empresas/index', $data);
@@ -30,17 +30,18 @@ class Empresas extends CI_Controller {
 		//TODO: se nao for passado id nenhum retorna erro
 		if ($id > 0) {
 			$data['title'] = 'Empresas';
-			$data['js_files'] 		= array('empresa.js?v=0.1');
+			$data['js_files'] 		= array('empresas.js?v=0.1');
 	
 
-			$user= $this->model_empresas->get($id);
-				$data['users'] = $user[0];
+			$empresa = $this->model_empresas->get($id);
+				$data['empresas'] = $empresa[0];
 				$this->load->view('header', $data);
 				$this->load->view('empresas/profile', $data);
 				$this->load->view('footer', $data);
 			
 			
 		}else{
+			$data['title'] = 'Error';
 			$data['heading'] = 'Empresas';
 			$data['message'] = 'Usuário não localizado';
 			$this->load->view('header', $data);
@@ -60,7 +61,7 @@ class Empresas extends CI_Controller {
 			
 			$this->model_empresas->edit($this->input->post('id'), $data);
 			return print_r(json_encode(array(
-				'message' => 'empresa criado com sucesso',
+				'message' => 'empresa alterada com sucesso',
 				'url' => site_url('/empresas/profile/'. $this->input->post('id'))
 			)));
 		}
@@ -69,7 +70,7 @@ class Empresas extends CI_Controller {
 	public function add()
 	{
 		$data['title'] = 'Empresas';
-		$data['js_files'] 		= array('empresa.js?v=0.1.2');
+		$data['js_files'] 		= array('empresas.js?v=0.1');
 
 		$this->load->view('header', $data);
 		$this->load->view('empresas/add', $data);

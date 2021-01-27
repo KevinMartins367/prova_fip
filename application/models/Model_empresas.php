@@ -1,14 +1,18 @@
 <?php
-class Model_empresas extends CI_Model {
+class Model_empresas extends CI_Model
+{
 
 
-  /**
-   * Retorna todas as empresas
-   */
-  public function get_all() {
-    return $this->db->get('empresas')
-                    ->result();
-  }  
+	/**
+	 * Retorna todas as empresas
+	 */
+	public function get_all()
+	{
+		$this->db->select('E.*');
+		$this->db->from('empresas E');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 
 	public function get($id)
 	{

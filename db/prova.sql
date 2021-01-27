@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `prova`.`usuarios` (
   `nome` VARCHAR(45) NULL,
   `login` VARCHAR(45) NULL,
   `cargo` VARCHAR(45) NULL,
+  `empresa_id` int(11) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,9 +43,9 @@ ENGINE = InnoDB;
 -- Query: 
 -- Date: 2020-12-09 18:39
 */
-INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`) VALUES (1,'Bruno Pereira','bruno','Engenheiro');
-INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`) VALUES (2,'Priscila Alcantara','pri','Estagiário');
-INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`) VALUES (3,'Lucas Pansini','lucas','Recursos Humanos');
+INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`,`empresa_id`) VALUES (1,'Bruno Pereira','bruno','Engenheiro', 1);
+INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`,`empresa_id`) VALUES (2,'Priscila Alcantara','pri','Estagiário', 1);
+INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`,`empresa_id`) VALUES (3,'Lucas Pansini','lucas','Recursos Humanos', 3);
 
 /*
 -- Query: 
@@ -53,7 +54,6 @@ INSERT INTO `usuarios` (`id`,`nome`,`login`,`cargo`) VALUES (3,'Lucas Pansini','
 INSERT INTO `empresas` (`id`,`nome`,`cnpj`) VALUES (1,'Fip Instrumentos','123123');
 INSERT INTO `empresas` (`id`,`nome`,`cnpj`) VALUES (2,'Fumaça','312312');
 INSERT INTO `empresas` (`id`,`nome`,`cnpj`) VALUES (3,'Fip Fumaça','3453123123');
-
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
