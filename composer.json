@@ -1,5 +1,13 @@
 {
+    "name": "prova/fip",
     "require": {
         "vlucas/phpdotenv": "^5.3"
+    },
+    "scripts": {
+        "start": "php -S localhost:8080",
+        "test": "phpunit"
+    },
+    "config": {
+        "process-timeout": 0
     }
 }

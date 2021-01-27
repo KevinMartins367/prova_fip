@@ -1,8 +1,9 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<div class="container-fluid">
+	<div class="content-wrapper">
 
-echo "\nERROR: ",
-	$heading,
-	"\n\n",
-	$message,
-	"\n\n";
+		<div class="content-header row text-center">
+			<h3 class="content-header-title"><?php echo $heading; ?></h3>
+			<h5 class="content-header-title"><?php echo $message; ?></h5>
+		</div>
+
+</div>
