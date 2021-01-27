@@ -1,4 +1,4 @@
-<div class="container-fluid text-center">
+<div class="container container-fluid text-center">
 
 	<h1><?php echo $title; ?></h1>
 	<div class="row">
