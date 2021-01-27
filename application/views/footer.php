@@ -5,7 +5,7 @@
   <?php 
 	if (isset($js_files)) { 
 		foreach ($js_files as $js_file): ?>
-		<script src="<?php echo base_url(); ?>assets/<?php echo $js_file; ?>"></script>
+		<script src="<?php echo base_url(); ?>assets/js/<?php echo $js_file; ?>"></script>
 		<?php endforeach;
 	} ?>
 </body>
