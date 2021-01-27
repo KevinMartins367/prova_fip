@@ -24,9 +24,9 @@ class Model_usuarios extends CI_Model
 		$this->db->insert('usuarios', $data);
 
 		// GET ID
-		$customer_id = $this->db->insert_id();
+		$id = $this->db->insert_id();
 		//RETURN ID
-		return $customer_id;
+		return $id;
 	}
 
 	public function edit($id, $data)

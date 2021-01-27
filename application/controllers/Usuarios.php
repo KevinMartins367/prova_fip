@@ -4,18 +4,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Usuarios extends CI_Controller
 {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('model_usuarios');
+	}
 
 	public function index()
 	{
-		$this->load->model('model_usuarios');
-		//TODO: carregar o model usuarios
-		//TODO: chamar a funcao do model que lista os usuarios e retornar para uma variavel
-		//TODO: passa a variavel para a view
-		//TODO: na view fazer o tratamento dos dados
-		//TODO: criar uma tabela simples, colocar um link para entrar no perfil do usuario via /profile
 
 		$data['title'] = 'Usuários';
-		$data['js_files'] 		= array();
+		$data['js_files'] 		= array('usuario.js?v=0.1');
+		$data['css_files'] 		= array();
 
 
 
@@ -27,27 +27,87 @@ class Usuarios extends CI_Controller
 	}
 
 	public function profile($id)
-	{
-		//TODO: carregar o model usuarios
-		//TODO: chamar a funcao do model que retorna o usuario especifico
-		//TODO: se nao existir o id do usuario retornar um erro    
+	{  
 		//TODO: se nao for passado id nenhum retorna erro
-		//TODO: passa a variavel para a view
-		//TODO: criar a view e carregar os valores    
+		if ($id > 0) {
+			$data['title'] = 'Usuários';
+			$data['js_files'] 		= array('usuario.js?v=0.1');
+	
+
+			$user= $this->model_usuarios->get($id);
+				$data['users'] = $user[0];
+				$this->load->view('header', $data);
+				$this->load->view('usuarios/profile', $data);
+				$this->load->view('footer', $data);
+			
+			
+		}else{
+			$data['heading'] = 'Usuários';
+			$data['message'] = 'Usuário não localizado';
+			$this->load->view('header', $data);
+			$this->load->view('errors/cli/error_404', $data);
+			$this->load->view('footer', $data);
+		}
+	}
+
+	public function ajax_update()
+	{
+		if ($this->input->post()) 
+		{
+			$data = array(
+				'nome' => $this->input->post('name'),
+				'login' => $this->input->post('login'),
+				'cargo' => $this->input->post('cargo')
+			);
+			
+			$this->model_usuarios->edit($this->input->post('id'), $data);
+			return print_r(json_encode(array(
+				'message' => 'usuario criado com sucesso',
+				'url' => site_url('/usuarios/profile/'. $this->input->post('id'))
+			)));
+		}
+	}
+
+	public function add()
+	{
+		$data['title'] = 'Usuários';
+		$data['js_files'] 		= array('usuario.js?v=0.1.2');
+
+		$this->load->view('header', $data);
+		$this->load->view('usuarios/add', $data);
+		$this->load->view('footer', $data);
 	}
 
 
 	public function ajax_delete()
 	{
-		//TODO: vai receber o id via post e deletar o usuario
-		//TODO: Criar uma funcao no model que recebe o id e apaga o usuario
-		//retornar um JSON caso tenha conseguido
+		
+		if ($this->input->post()) 
+		{
+			$this->model_usuarios->delete($this->input->post('id'));
+
+			return print_r(json_encode(array(
+				'message' => 'usuario deletado com sucesso',
+				'url' => site_url('/usuarios')
+			)));
+		}
 	}
 
 	public function ajax_save()
 	{
-		//TODO: vai receber os dados via post e salvar
-		//TODO: criar a funcao no model para salvar os dados
-		//TODO: retornar um JSON caso tenha conseguido
+		if ($this->input->post()) 
+		{
+			$data = array(
+				'nome' => $this->input->post('name'),
+				'login' => $this->input->post('login'),
+				'cargo' => $this->input->post('cargo')
+			);
+			
+			$id = $this->model_usuarios->insert($data);
+			return print_r(json_encode(array(
+				'message' => 'usuario criado com sucesso',
+				'url' => site_url('/usuarios/profile/'. $id)
+			)));
+		}
 	}
 }
