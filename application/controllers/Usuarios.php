@@ -28,11 +28,13 @@ class Usuarios extends CI_Controller
 
 	public function profile($id)
 	{  
+		$this->load->model('model_empresas');
 		//TODO: se nao for passado id nenhum retorna erro
 		if ($id > 0) {
 			$data['title'] = 'Usuários';
 			$data['js_files'] 		= array('usuario.js?v=0.1');
 	
+			$data['empresas'] 		= $this->model_empresas->get_all();
 
 			$user= $this->model_usuarios->get($id);
 				$data['users'] = $user[0];
@@ -42,6 +44,7 @@ class Usuarios extends CI_Controller
 			
 			
 		}else{
+			$data['title'] = 'Error';
 			$data['heading'] = 'Usuários';
 			$data['message'] = 'Usuário não localizado';
 			$this->load->view('header', $data);
@@ -57,12 +60,13 @@ class Usuarios extends CI_Controller
 			$data = array(
 				'nome' => $this->input->post('name'),
 				'login' => $this->input->post('login'),
-				'cargo' => $this->input->post('cargo')
+				'cargo' => $this->input->post('cargo'),
+				'empresa_id' => $this->input->post('empresa_id')
 			);
 			
 			$this->model_usuarios->edit($this->input->post('id'), $data);
 			return print_r(json_encode(array(
-				'message' => 'usuario criado com sucesso',
+				'message' => 'usuario Alterado com sucesso',
 				'url' => site_url('/usuarios/profile/'. $this->input->post('id'))
 			)));
 		}
@@ -70,7 +74,11 @@ class Usuarios extends CI_Controller
 
 	public function add()
 	{
+		$this->load->model('model_empresas');
 		$data['title'] = 'Usuários';
+
+		$data['empresas'] 		= $this->model_empresas->get_all();
+
 		$data['js_files'] 		= array('usuario.js?v=0.1.2');
 
 		$this->load->view('header', $data);
@@ -100,7 +108,8 @@ class Usuarios extends CI_Controller
 			$data = array(
 				'nome' => $this->input->post('name'),
 				'login' => $this->input->post('login'),
-				'cargo' => $this->input->post('cargo')
+				'cargo' => $this->input->post('cargo'),
+				'empresa_id' => $this->input->post('empresa_id')
 			);
 			
 			$id = $this->model_usuarios->insert($data);

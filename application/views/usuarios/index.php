@@ -18,23 +18,25 @@
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
+								<th scope="col">Empresa</th>
 								<th scope="col">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach ($users as $user) : ?>
 								<tr>
-									<td><?php echo $user->id; ?></td>
-									<td><?php echo $user->nome; ?></td>
+									<td><?php echo $user['id']; ?></td>
+									<td><?php echo $user['nome']; ?></td>
+									<td><?php echo $user['empresa_nome']; ?></td>
 									<td>
 										<div class="row">
 											<div class="col-md-6 col-sm-12">
-												<a class="btn btn-primary" href="<?php echo site_url('usuarios/profile/' . $user->id); ?>">
+												<a class="btn btn-primary" href="<?php echo site_url('usuarios/profile/' . $user['id']); ?>">
 													Alterar
 												</a>
 											</div>
 											<div class="col-md-6 col-sm-12">
-												<a class="btn btn-danger" data-id="<?php echo $user->id; ?>">
+												<a class="btn btn-danger" data-id="<?php echo $user['id']; ?>">
 													Deletar
 												</a>
 											</div>

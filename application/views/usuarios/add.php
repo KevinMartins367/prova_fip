@@ -39,6 +39,21 @@
 												</div>
 											</div>
 										</div>
+										<div class="col-md-6 mb-3">
+											<div class="form-group">
+												<label class="form-label" for="cargo">Empresa</label>
+												<div class="controls">
+													<select class="form-control" name="empresa_id" id="empresa_id" required="" data-validation-required-message="Campo obrigatório" data-placeholder="Selecione..." style="width:100%">
+														
+														<?php
+														foreach ($empresas as $empresa) { ?>
+															<option value="<?php echo $empresa['id']; ?>"><?php echo $empresa['nome']; ?></option>
+														<?php
+														} ?>
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="card-footer text-muted text-center">
